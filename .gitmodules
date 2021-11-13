@@ -1,0 +1,12 @@
+[submodule "third_party/turtlebot3_msgs"]
+	path = third_party/turtlebot3_msgs
+	url = git@github.com:ROBOTIS-GIT/turtlebot3_msgs.git
+	branch = melodic-devel
+[submodule "third_party/turtlebot3_simulations"]
+	path = third_party/turtlebot3_simulations
+	url = git@github.com:ROBOTIS-GIT/turtlebot3_simulations.git
+	branch = melodic-devel
+[submodule "third_party/gazebo_ros_pkgs"]
+	path = third_party/gazebo_ros_pkgs
+	url = git@github.com:ros-simulation/gazebo_ros_pkgs.git
+	branch = melodic-devel
