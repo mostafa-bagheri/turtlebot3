@@ -1,0 +1,90 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: isort
+        name: isort
+        entry: py3_venv/bin/isort
+        language: python
+        types: [python]
+        require_serial: false
+
+-   repo: local
+    hooks:
+    -   id: black
+        name: black
+        entry: py3_venv/bin/black
+        language: python
+        language_version: python3.7
+        require_serial: true
+        types_or: [python, pyi]
+
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+    -   id: check-added-large-files
+        args: ['--maxkb=5120']
+    -   id: trailing-whitespace
+        files: (\.py|\.c|\.cpp|\.h|\.cu|\.rst|\.yaml|\.sh|\.launch|Jenkinsfile|\.clang-format|\.md)$
+    -   id: check-merge-conflict
+
+-   repo: local
+    hooks:
+    -   id: flake8
+        name: flake8
+        entry: py3_venv/bin/flake8
+        language: python
+        types: [python]
+        require_serial: true
+        # To turn this into an error, remove --exit-zero below
+        args: ['--config', 'build_utils/flake8.config','--exit-zero']
+        verbose: true
+
+-   repo: local
+    hooks:
+    -   id: cmake-format
+        name: cmake-format
+        entry: py3_venv/bin/cmake-format
+        args: [--in-place]
+        language: python
+        types: [cmake]
+
+-   repo: local
+    hooks:
+    -   id: clang-format
+        name: clang-format
+        entry:  py3_venv/bin/clang-format -i
+        language: system
+        files: \.(c|cc|cpp|cu|h|hh|hpp|proto)$
+
+-   repo: local
+    hooks:
+    -   id: pylint
+        name: pylint
+        entry: py3_venv/bin/pylint
+        language: python
+        types: [python]
+        require_serial: true
+        args: ['--rcfile=.pylintrc', '--exit-zero']
+        verbose: true
+
+-   repo: local
+    hooks:
+    -   id: mypy
+        name: mypy
+        entry: py3_venv/bin/mypy
+        language: python
+        language_version: python3.7
+        types: [python]
+        require_serial: true
+        verbose: true
+        entry: bash -c 'mypy "$@" || true'
+        args: ['--config-file=pyproject.toml']
+
+-   repo: local
+    hooks:
+    -   id: sdfpretty
+        name: sdfpretty
+        description: Prettify SDF files
+        language: system
+        entry: python platform/simulation/sdf_tools/src/sdf_tools/sdfpretty_hook.py
+        files: (model.config)|(\.(sdf|sdf.xacro)$)
